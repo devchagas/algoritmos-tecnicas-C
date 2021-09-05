@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int k = 0;
-
 int main(){
 	int nA, nB, i, j, cont, k;
 	int *A, *B, *res;
@@ -21,6 +19,7 @@ int main(){
 	}
 
 	if (nA > nB){
+		k = nA;
 		res = (int *) malloc (nA * sizeof(int));
 		for (i = 0; i < nA; i++){
 			res[i] = A[i];
@@ -28,17 +27,13 @@ int main(){
 		
 		for (i = 0; i < nB; i++){
 			for (j = 0; j < nA; j++){
-				if (B[i] != A[j]){
-					res = realloc(res, (nA+1) * sizeof(int));
-					nA++;
-					k = nA;
-					res[k] = B[i];
-				}
+				if (B[i] == A[j])
+				 break;
 			}
-		}
-		
-		for (i = 0; i < nA; i++){
-			printf("%d ", res);
+			res = realloc(res, (nA+1) * sizeof(int));
+			nA++;
+			res[k] = B[i];
+			k++;
 		}
 	}
 	
@@ -54,17 +49,11 @@ int main(){
 				if (A[i] == B[j])
 				 break;
 			}
-			res = realloc(res, (nB+1) * sizeof(int));
+			res = realloc(res, (Nb+1) * sizeof(int));
 			nB++;
 			res[k] = B[i];
 			k++;
 		}
-		
-		for (i = 0; i < nB; i++){
-			printf("%d ", res);
-		}
 	}
-	
-	
 	
 }
